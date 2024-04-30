@@ -7,41 +7,34 @@ function preload(){
 function setup() {
   createCanvas(800, 800);
 
-  // Define the size of the video
-  videoWidth = 143; // You can change this value to adjust the width of the video
-  videoHeight = 100; // You can change this value to adjust the height of the video
+  videoWidth = 143; 
+  videoHeight = 100; 
 
   video = createCapture(VIDEO);
   video.size(videoWidth, videoHeight);
 
-  // Calculate the position to center the video
-  videoX = (width - video.width) / 2.49; // You can adjust this value to change the horizontal position of the video
-  videoY = 260; // You can adjust this value to change the vertical position of the video
-
+  videoX = (width - video.width) / 2.49; 
+  videoY = 260; 
   video.hide(); 
 }
 
 function draw() {
   background(0);
 
-  // Apply grayscale to the video
   video.loadPixels();
   for (let i = 0; i < video.pixels.length; i += 4) {
     let gray = (video.pixels[i] + video.pixels[i + 1] + video.pixels[i + 2]) / 3;
-    video.pixels[i] = gray; // Set red channel to grayscale value
-    video.pixels[i + 1] = gray; // Set green channel to grayscale value
-    video.pixels[i + 2] = gray; // Set blue channel to grayscale value
+    video.pixels[i] = gray; 
+    video.pixels[i + 1] = gray; 
+    video.pixels[i + 2] = gray; 
   }
   video.updatePixels();
 
-  // Draw the webcam video
   image(video, videoX, videoY, videoWidth, videoHeight);
   
-  // Draw the background image
   image(cave, 200, 200);
 
-  // Pixelate the video
-  let pixelSize = 4; //the level of pixelation
+  let pixelSize = 4;
   video.loadPixels();
   noStroke();
   for (let y = 0; y < video.height; y += pixelSize) {
